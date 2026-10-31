@@ -2,8 +2,8 @@
 import math
 
 groupmates = [
-    {"name": "Алексей", "surname": "Морозов",
-     "patronymic": "Ильич", "group": "БСТ0001",
+    {"name": "Денис", "surname": "Уваров",
+     "patronymic": "Александрович", "group": "БСТ2351",
      "exams": ["ПИС", "Математика", "Информатика"], "marks": [4, 3, 5]},
     {"name": "Иван", "surname": "Петров",
      "patronymic": "Сергеевич", "group": "БСТ0001",
@@ -61,7 +61,7 @@ def read_threshold():
 
 
 def main():
-    print("Список студентов группы БСТ0001")
+    print("Список студентов")
     print_students(groupmates)
     try:
         threshold = read_threshold()

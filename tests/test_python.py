@@ -26,10 +26,10 @@ class PythonTasksTests(unittest.TestCase):
         self.assertEqual(len(groupmates), 6)
         self.assertEqual((groupmates[0]["surname"], groupmates[0]["name"],
                           groupmates[0]["patronymic"], groupmates[0]["group"]),
-                         ("Морозов", "Алексей", "Ильич", "БСТ0001"))
+                         ("Уваров", "Денис", "Александрович", "БСТ2351"))
         for student in groupmates:
             self.assertEqual(set(student), {"name", "surname", "patronymic", "group", "exams", "marks"})
-            self.assertEqual(student["group"], "БСТ0001")
+            self.assertIn(student["group"], {"БСТ0001", "БСТ2351"})
             self.assertEqual(len(student["exams"]), len(student["marks"]))
             self.assertTrue(all(2 <= mark <= 5 for mark in student["marks"]))
 
@@ -66,7 +66,9 @@ class PythonTasksTests(unittest.TestCase):
         result = self.run_program("mygroup.py", "4\n")
         self.assertEqual(result.returncode, 0)
         self.assertIn("Найдено студентов: 3", result.stdout)
-        self.assertIn("Морозов Алексей Ильич", result.stdout)
+        self.assertIn("Уваров Денис Александрович", result.stdout)
+        self.assertLess(result.stdout.index("Уваров Денис Александрович"), result.stdout.index("Петров Иван"))
+        self.assertIn("БСТ2351", result.stdout)
         self.assertIn("БСТ0001", result.stdout)
 
     def test_bad_input_retried_and_decimal_comma(self):
